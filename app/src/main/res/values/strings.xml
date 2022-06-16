@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TodoRemake</string>
+    <string name="bottom_menu_todo">Tasks</string>
+    <string name="bottom_menu_completed">Completed</string>
 </resources>
