@@ -10,7 +10,7 @@ class TasksViewModel @Inject constructor(): ViewModel() {
 
     var tasks = MutableLiveData<MutableList<Task>>()
 
-    fun addTask() {
-        tasks.postValue(mutableListOf(Task("task name", "", false)))
+    fun addTask(task: Task) {
+        tasks.postValue(mutableListOf(task))
     }
 }
