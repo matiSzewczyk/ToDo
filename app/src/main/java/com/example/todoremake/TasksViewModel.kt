@@ -8,9 +8,11 @@ import javax.inject.Inject
 @HiltViewModel
 class TasksViewModel @Inject constructor(): ViewModel() {
 
-    var tasks = MutableLiveData<MutableList<Task>>()
+    var _tasks = MutableLiveData<MutableList<Task>>()
+    var tasks = mutableListOf<Task>()
 
     fun addTask(task: Task) {
-        tasks.postValue(mutableListOf(task))
+        tasks.add(task)
+        _tasks.postValue(tasks)
     }
 }

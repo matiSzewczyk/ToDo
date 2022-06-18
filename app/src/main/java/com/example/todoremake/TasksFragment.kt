@@ -23,10 +23,10 @@ class TasksFragment : Fragment(R.layout.fragment_tasks){
         binding = FragmentTasksBinding.bind(view)
         setupRecyclerView()
 
-        val tasksObserver = Observer<MutableList<Task>> {
-            tasksAdapter.insertTask(it[it.size - 1])
+        val tasksObserver = Observer<List<Task>> {
+            tasksAdapter.notifyItemInserted(it.size - 1)
         }
-        tasksViewModel.tasks.observe(viewLifecycleOwner, tasksObserver)
+        tasksViewModel._tasks.observe(viewLifecycleOwner, tasksObserver)
 
         binding.button.setOnClickListener {
             lifecycleScope.launch(Main) {
@@ -37,7 +37,7 @@ class TasksFragment : Fragment(R.layout.fragment_tasks){
     }
 
     private fun setupRecyclerView() = binding.tasksRecyclerView.apply {
-        tasksAdapter = TasksAdapter()
+        tasksAdapter = TasksAdapter(tasksViewModel.tasks)
         adapter = tasksAdapter
         layoutManager = LinearLayoutManager(context)
     }

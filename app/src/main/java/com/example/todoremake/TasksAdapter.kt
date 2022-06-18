@@ -5,9 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoremake.databinding.TaskItemBinding
 
-class TasksAdapter : RecyclerView.Adapter<TasksAdapter.ItemsViewHolder>() {
+class TasksAdapter(
+    private val tasks: MutableList<Task>
+) : RecyclerView.Adapter<TasksAdapter.ItemsViewHolder>() {
 
-    private var tasks = mutableListOf<Task>()
     inner class ItemsViewHolder(val binding: TaskItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemsViewHolder {
@@ -21,15 +22,10 @@ class TasksAdapter : RecyclerView.Adapter<TasksAdapter.ItemsViewHolder>() {
     override fun onBindViewHolder(holder: ItemsViewHolder, position: Int) {
         holder.binding.apply {
             taskName.text = tasks[position].name
+            taskDescription.text = tasks[position].description
+            taskCheckBox.isChecked = tasks[position].isChecked
         }
     }
 
-    override fun getItemCount(): Int {
-        return tasks.size
-    }
-
-    fun insertTask(task: Task) {
-        tasks.add(task)
-        notifyItemInserted(tasks.size - 1)
-    }
+    override fun getItemCount() = tasks.size
 }
