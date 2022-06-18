@@ -6,10 +6,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todoremake.databinding.TaskItemBinding
 
 class TasksAdapter(
-    private val tasks: MutableList<Task>
+    private val tasks: MutableList<Task>,
+    private val customClickInterface: CustomClickInterface
 ) : RecyclerView.Adapter<TasksAdapter.ItemsViewHolder>() {
 
-    inner class ItemsViewHolder(val binding: TaskItemBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ItemsViewHolder(val binding: TaskItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        init {
+            apply {
+                itemView.setOnClickListener {
+                    customClickInterface.onClickListener(adapterPosition, itemView)
+                }
+            }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemsViewHolder {
         return ItemsViewHolder(

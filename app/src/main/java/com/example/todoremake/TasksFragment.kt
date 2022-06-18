@@ -2,6 +2,7 @@ package com.example.todoremake
 
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -11,7 +12,7 @@ import com.example.todoremake.databinding.FragmentTasksBinding
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 
-class TasksFragment : Fragment(R.layout.fragment_tasks){
+class TasksFragment : Fragment(R.layout.fragment_tasks), CustomClickInterface {
 
     private lateinit var binding: FragmentTasksBinding
     private lateinit var tasksAdapter: TasksAdapter
@@ -37,8 +38,16 @@ class TasksFragment : Fragment(R.layout.fragment_tasks){
     }
 
     private fun setupRecyclerView() = binding.tasksRecyclerView.apply {
-        tasksAdapter = TasksAdapter(tasksViewModel.tasks)
+        tasksAdapter = TasksAdapter(
+            tasksViewModel.tasks,
+            this@TasksFragment
+        )
         adapter = tasksAdapter
         layoutManager = LinearLayoutManager(context)
+    }
+
+    override fun onClickListener(position: Int, view: View) {
+        val hiddenLayout = view.findViewById<LinearLayout>(R.id.hidden_layout)
+        hiddenLayout.visibility = if (hiddenLayout.visibility == View.GONE) View.VISIBLE else View.GONE
     }
 }
