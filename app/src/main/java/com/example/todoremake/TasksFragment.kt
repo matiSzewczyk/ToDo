@@ -23,7 +23,6 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), CustomClickInterface {
 
         binding = FragmentTasksBinding.bind(view)
         setupRecyclerView()
-
         val tasksObserver = Observer<List<Task>> {
             tasksAdapter.notifyItemInserted(it.size - 1)
         }
@@ -35,6 +34,13 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), CustomClickInterface {
                 dialog.show(childFragmentManager, "show")
             }
         }
+        binding.buttonRemove.setOnClickListener {
+            tasksViewModel.removeAll()
+        }
+        lifecycleScope.launch(Main) {
+            tasksViewModel.getTasks()
+        }
+
     }
 
     private fun setupRecyclerView() = binding.tasksRecyclerView.apply {

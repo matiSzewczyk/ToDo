@@ -8,5 +8,6 @@ class TodoApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        ObjectBox.init(applicationContext)
     }
 }

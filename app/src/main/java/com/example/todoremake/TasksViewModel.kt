@@ -6,7 +6,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class TasksViewModel @Inject constructor(): ViewModel() {
+class TasksViewModel @Inject constructor(
+    private val repository: TasksRepository
+): ViewModel() {
 
     var _tasks = MutableLiveData<MutableList<Task>>()
     var tasks = mutableListOf<Task>()
@@ -14,5 +16,26 @@ class TasksViewModel @Inject constructor(): ViewModel() {
     fun addTask(task: Task) {
         tasks.add(task)
         _tasks.postValue(tasks)
+        repository.saveToObjectBox(task)
+    }
+    fun getTasks() {
+        println("List: ${repository.getObjectBoxList()}")
+        if (tasks.isEmpty()) {
+            repository.getObjectBoxList().forEach {
+                val task = Task(
+                    it.taskName,
+                    it.taskDescription,
+                    it.isChecked
+                )
+                tasks.add(task)
+                _tasks.postValue(tasks)
+            }
+        }
+//            tasks = repository.getObjectBoxList()
+//            _tasks.postValue(tasks)
+    }
+
+    fun removeAll() {
+        repository.removeAll()
     }
 }
