@@ -54,8 +54,11 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), CustomClickInterface {
         layoutManager = LinearLayoutManager(context)
     }
 
-    override fun onClickListener(position: Int, hiddenLayout: LinearLayout) {
-        hiddenLayout.visibility = if (hiddenLayout.visibility == View.GONE) View.VISIBLE else View.GONE
+    override fun onClickListener(position: Int, hiddenLayout: LinearLayout, taskDescription: TextView) {
+        if (taskDescription.text.isNotEmpty()) {
+            hiddenLayout.visibility =
+                if (hiddenLayout.visibility == View.GONE) View.VISIBLE else View.GONE
+        }
     }
 
     override fun onCheckedChangeListener(
