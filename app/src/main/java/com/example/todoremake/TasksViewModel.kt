@@ -19,7 +19,6 @@ class TasksViewModel @Inject constructor(
         repository.saveToObjectBox(task)
     }
     fun getTasks() {
-        println("List: ${repository.getObjectBoxList()}")
         if (tasks.isEmpty()) {
             repository.getObjectBoxList().forEach {
                 val task = Task(
@@ -31,8 +30,6 @@ class TasksViewModel @Inject constructor(
                 _tasks.postValue(tasks)
             }
         }
-//            tasks = repository.getObjectBoxList()
-//            _tasks.postValue(tasks)
     }
 
     fun removeAll() {
