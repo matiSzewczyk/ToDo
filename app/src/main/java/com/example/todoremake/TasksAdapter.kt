@@ -14,7 +14,7 @@ class TasksAdapter(
         init {
             apply {
                 itemView.setOnClickListener {
-                    customClickInterface.onClickListener(adapterPosition, itemView)
+                    customClickInterface.onClickListener(adapterPosition, binding.hiddenLayout)
                 }
                 binding.taskCheckBox.setOnCheckedChangeListener { _, isChecked ->
                     customClickInterface.onCheckedChangeListener(

@@ -54,8 +54,7 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), CustomClickInterface {
         layoutManager = LinearLayoutManager(context)
     }
 
-    override fun onClickListener(position: Int, view: View) {
-        val hiddenLayout = view.findViewById<LinearLayout>(R.id.hidden_layout)
+    override fun onClickListener(position: Int, hiddenLayout: LinearLayout) {
         hiddenLayout.visibility = if (hiddenLayout.visibility == View.GONE) View.VISIBLE else View.GONE
     }
 
