@@ -3,6 +3,8 @@ package com.example.todoremake
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -55,5 +57,17 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), CustomClickInterface {
     override fun onClickListener(position: Int, view: View) {
         val hiddenLayout = view.findViewById<LinearLayout>(R.id.hidden_layout)
         hiddenLayout.visibility = if (hiddenLayout.visibility == View.GONE) View.VISIBLE else View.GONE
+    }
+
+    override fun onCheckedChangeListener(
+        adapterPosition: Int,
+        checked: Boolean,
+        taskName: TextView,
+        taskDescription: TextView
+    ) {
+        if (checked) {
+            Toast.makeText(context, "Completed: ${taskName.text} ${taskDescription.text}", Toast.LENGTH_SHORT)
+                .show()
+        }
     }
 }

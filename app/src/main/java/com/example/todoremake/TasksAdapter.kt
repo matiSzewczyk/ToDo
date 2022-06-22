@@ -16,6 +16,14 @@ class TasksAdapter(
                 itemView.setOnClickListener {
                     customClickInterface.onClickListener(adapterPosition, itemView)
                 }
+                binding.taskCheckBox.setOnCheckedChangeListener { _, isChecked ->
+                    customClickInterface.onCheckedChangeListener(
+                        adapterPosition,
+                        isChecked,
+                        binding.taskName,
+                        binding.taskDescription
+                    )
+                }
             }
         }
     }
@@ -25,7 +33,8 @@ class TasksAdapter(
             TaskItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
-                false))
+                false)
+        )
     }
 
     override fun onBindViewHolder(holder: ItemsViewHolder, position: Int) {
