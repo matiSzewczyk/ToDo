@@ -26,10 +26,18 @@ class TasksViewModel @Inject constructor(
                     it.taskDescription,
                     it.isChecked
                 )
-                tasks.add(task)
-                _tasks.postValue(tasks)
+                if (!task.isChecked) {
+                    tasks.add(task)
+                    _tasks.postValue(tasks)
+                }
             }
         }
+    }
+
+    fun removeTask(task: Task, position: Int) {
+        tasks.removeAt(position)
+        _tasks.postValue(tasks)
+        repository.addToCompleted(task)
     }
 
     fun removeAll() {

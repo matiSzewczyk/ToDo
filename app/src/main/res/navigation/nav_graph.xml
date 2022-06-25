@@ -9,7 +9,7 @@
         android:name="com.example.todoremake.TasksFragment"
         android:label="TasksFragment" />
     <fragment
-        android:id="@+id/completedFragment"
-        android:name="com.example.todoremake.CompletedFragment"
+        android:id="@+id/completedTasksFragment"
+        android:name="com.example.todoremake.CompletedTasksFragment"
         android:label="CompletedFragment" />
 </navigation>

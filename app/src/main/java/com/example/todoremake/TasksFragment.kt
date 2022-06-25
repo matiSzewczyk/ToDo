@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -26,7 +25,7 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), CustomClickInterface {
         binding = FragmentTasksBinding.bind(view)
         setupRecyclerView()
         val tasksObserver = Observer<List<Task>> {
-            tasksAdapter.notifyItemInserted(it.size - 1)
+            tasksAdapter.notifyDataSetChanged()
         }
         tasksViewModel._tasks.observe(viewLifecycleOwner, tasksObserver)
 
@@ -68,8 +67,9 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), CustomClickInterface {
         taskDescription: TextView
     ) {
         if (checked) {
-            Toast.makeText(context, "Completed: ${taskName.text} ${taskDescription.text}", Toast.LENGTH_SHORT)
-                .show()
+            val task =
+                Task(taskName.text.toString(), taskDescription.text.toString(), true)
+            tasksViewModel.removeTask(task, adapterPosition)
         }
     }
 }

@@ -15,10 +15,23 @@ class TasksRepository @Inject constructor(){
         )
         tasksBox.put(taskOB)
     }
+
     fun getObjectBoxList(): MutableList<TaskOB> {
         return tasksBox.all.toMutableList()
     }
+
     fun removeAll() {
         tasksBox.removeAll()
+    }
+
+    fun addToCompleted(task: Task) {
+        val query = tasksBox
+            .query(TaskOB_.taskName.equal(task.name!!))
+            .build()
+        val result = query.findFirst()
+        result?.isChecked = true
+        if (result != null)
+            tasksBox.put(result)
+        query.close()
     }
 }

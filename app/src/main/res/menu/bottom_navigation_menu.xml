@@ -6,7 +6,7 @@
         android:icon="@drawable/todo_img"
         android:title="@string/bottom_menu_todo"/>
     <item
-        android:id="@+id/completedFragment"
+        android:id="@+id/completedTasksFragment"
         android:enabled="true"
         android:icon="@drawable/completed_img"
         android:title="@string/bottom_menu_completed"/>
