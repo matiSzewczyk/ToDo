@@ -27,4 +27,9 @@ class CompletedTasksViewModel @Inject constructor(
             }
         }
     }
+
+    fun addToCompleted(task: Task) {
+        repository.addToCompleted(task)
+    }
+
 }

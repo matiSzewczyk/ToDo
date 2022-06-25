@@ -18,12 +18,14 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), CustomClickInterface {
     private lateinit var binding: FragmentTasksBinding
     private lateinit var tasksAdapter: TasksAdapter
     private val tasksViewModel: TasksViewModel by activityViewModels()
+    private val completedTasksViewModel: CompletedTasksViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentTasksBinding.bind(view)
         setupRecyclerView()
+
         val tasksObserver = Observer<List<Task>> {
             tasksAdapter.notifyDataSetChanged()
         }
@@ -35,13 +37,14 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), CustomClickInterface {
                 dialog.show(childFragmentManager, "show")
             }
         }
+
         binding.buttonRemove.setOnClickListener {
             tasksViewModel.removeAll()
         }
+
         lifecycleScope.launch(Main) {
             tasksViewModel.getTasks()
         }
-
     }
 
     private fun setupRecyclerView() = binding.tasksRecyclerView.apply {
@@ -69,7 +72,8 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), CustomClickInterface {
         if (checked) {
             val task =
                 Task(taskName.text.toString(), taskDescription.text.toString(), true)
-            tasksViewModel.removeTask(task, adapterPosition)
+            tasksViewModel.removeTaskFromRv(adapterPosition)
+            completedTasksViewModel.addToCompleted(task)
         }
     }
 }

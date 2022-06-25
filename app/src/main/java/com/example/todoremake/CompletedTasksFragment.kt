@@ -31,7 +31,6 @@ class CompletedTasksFragment : Fragment(R.layout.fragment_completed_tasks){
         lifecycleScope.launch(Dispatchers.Main) {
             completedTasksViewModel.getTasks()
         }
-
     }
 
     private fun setupRecyclerView() = binding.completedRecyclerView.apply {

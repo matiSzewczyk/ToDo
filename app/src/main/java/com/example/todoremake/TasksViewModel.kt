@@ -34,10 +34,9 @@ class TasksViewModel @Inject constructor(
         }
     }
 
-    fun removeTask(task: Task, position: Int) {
+    fun removeTaskFromRv(position: Int) {
         tasks.removeAt(position)
         _tasks.postValue(tasks)
-        repository.addToCompleted(task)
     }
 
     fun removeAll() {
