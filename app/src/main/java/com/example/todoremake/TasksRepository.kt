@@ -1,7 +1,9 @@
 package com.example.todoremake
 
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class TasksRepository @Inject constructor(){
 
     private val tasksBox = ObjectBox.store.boxFor(TaskOB::class.java)
