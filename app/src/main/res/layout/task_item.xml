@@ -57,6 +57,8 @@
             android:layout_height="wrap_content"
             android:textSize="17sp"
             android:layout_weight="1"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
             android:layout_marginBottom="15dp"
             tools:text="the description"/>
 
