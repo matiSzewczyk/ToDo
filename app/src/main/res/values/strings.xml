@@ -3,4 +3,5 @@
     <string name="bottom_menu_todo">Tasks</string>
     <string name="bottom_menu_completed">Completed</string>
     <string name="completed_today">Completed today</string>
+    <string name="todo">ToDo</string>
 </resources>
