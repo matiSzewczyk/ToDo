@@ -24,5 +24,6 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.findNavController()
 
         binding.bottomNavigation.setupWithNavController(navController)
+//        println("yo wtf: ${Constants().current}")
     }
 }

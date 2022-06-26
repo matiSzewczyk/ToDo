@@ -24,8 +24,9 @@ class CompletedTasksViewModel @Inject constructor(
             )
             if (task.isChecked) {
                 if (task.date != null) {
-                    if (task.date!! > Constants().DATE) {
+                    if (Constants().DATE > task.date!!) {
                         repository.removeFromBox(task)
+                        return@forEach
                     }
                 }
                 tasks.add(task)
