@@ -29,7 +29,6 @@
             android:layout_gravity="center_vertical"
             android:layout_weight=".8"
             android:textSize="24sp"
-            android:textStyle="bold"
             tools:text="Task name" />
 
         <CheckBox
