@@ -27,7 +27,14 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), CustomClickInterface {
         setupRecyclerView()
 
         val tasksObserver = Observer<List<Task>> {
-            tasksAdapter.notifyDataSetChanged()
+            if (it.size > tasksViewModel.listCount) {
+                tasksAdapter.notifyItemInserted(it.lastIndex)
+                tasksViewModel.listCount++
+            }
+            else if (it.size < tasksViewModel.listCount) {
+                tasksAdapter.notifyItemRemoved(tasksViewModel.removedPos)
+                tasksViewModel.listCount--
+            }
         }
         tasksViewModel._tasks.observe(viewLifecycleOwner, tasksObserver)
 

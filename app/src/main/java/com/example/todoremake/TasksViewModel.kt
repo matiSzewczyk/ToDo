@@ -12,6 +12,9 @@ class TasksViewModel @Inject constructor(
 
     var _tasks = MutableLiveData<MutableList<Task>>()
     var tasks = mutableListOf<Task>()
+    var removedPos = 0
+
+    var listCount = 0
 
     fun addTask(task: Task) {
         tasks.add(task)
@@ -31,11 +34,13 @@ class TasksViewModel @Inject constructor(
                     _tasks.postValue(tasks)
                 }
             }
+            listCount = tasks.size
         }
     }
 
     fun removeTaskFromRv(position: Int) {
         tasks.removeAt(position)
+        removedPos = position
         _tasks.postValue(tasks)
     }
 
