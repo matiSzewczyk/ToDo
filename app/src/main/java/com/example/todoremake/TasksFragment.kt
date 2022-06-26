@@ -38,7 +38,7 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), CustomClickInterface {
         }
         tasksViewModel._tasks.observe(viewLifecycleOwner, tasksObserver)
 
-        binding.button.setOnClickListener {
+        binding.addTaskButton.setOnClickListener {
             lifecycleScope.launch(Main) {
                 val dialog = NewTaskDialogFragment()
                 dialog.show(childFragmentManager, "show")
