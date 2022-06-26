@@ -6,10 +6,10 @@
 
     <fragment
         android:id="@+id/tasksFragment"
-        android:name="com.example.todoremake.TasksFragment"
+        android:name="com.app.todominimalistapp.TasksFragment"
         android:label="TasksFragment" />
     <fragment
         android:id="@+id/completedTasksFragment"
-        android:name="com.example.todoremake.CompletedTasksFragment"
+        android:name="com.app.todominimalistapp.CompletedTasksFragment"
         android:label="CompletedFragment" />
 </navigation>
