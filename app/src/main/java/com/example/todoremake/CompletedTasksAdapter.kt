@@ -24,7 +24,6 @@ class CompletedTasksAdapter(
     override fun onBindViewHolder(holder: ItemsViewHolder, position: Int) {
         holder.binding.apply {
             taskName.text = completedTasks[position].name
-            taskCheckBox.isChecked = completedTasks[position].isChecked
         }
     }
 

@@ -9,5 +9,6 @@ data class TaskOB(
     var taskId: Long? = 0,
     var taskName: String? = null,
     var taskDescription: String? = null,
-    var isChecked: Boolean = false
+    var isChecked: Boolean = false,
+    var completionDate: String? = null
 )

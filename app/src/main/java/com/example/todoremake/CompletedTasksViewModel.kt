@@ -19,9 +19,15 @@ class CompletedTasksViewModel @Inject constructor(
             val task = Task(
                 it.taskName,
                 it.taskDescription,
-                it.isChecked
+                it.isChecked,
+                it.completionDate
             )
             if (task.isChecked) {
+                if (task.date != null) {
+                    if (task.date!! > Constants().DATE) {
+                        repository.removeFromBox(task)
+                    }
+                }
                 tasks.add(task)
                 _tasks.postValue(tasks)
             }

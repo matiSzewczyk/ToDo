@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:7929132563783452386",
-      "lastPropertyId": "5:4662820916996911835",
+      "lastPropertyId": "4:5982183124581467087",
       "name": "TaskOB",
       "properties": [
         {
@@ -28,11 +28,6 @@
           "id": "4:5982183124581467087",
           "name": "isChecked",
           "type": 1
-        },
-        {
-          "id": "5:4662820916996911835",
-          "name": "completionDate",
-          "type": 9
         }
       ],
       "relations": []
