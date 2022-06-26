@@ -4,4 +4,9 @@
     <string name="bottom_menu_completed">Completed</string>
     <string name="completed_today">Completed today</string>
     <string name="todo">ToDo</string>
+    <string name="description">description</string>
+    <string name="cancel">cancel</string>
+    <string name="confirm">confirm</string>
+    <string name="new_task">New task</string>
+    <string name="task">task</string>
 </resources>
