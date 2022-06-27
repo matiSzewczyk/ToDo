@@ -12,8 +12,11 @@ class TasksViewModel @Inject constructor(
 
     var _tasks = MutableLiveData<MutableList<Task>>()
     var tasks = mutableListOf<Task>()
-    var removedPos = 0
 
+//     These variables allow me to know if an item was removed or inserted into the list
+//     as well as know it's position.
+//     As a result I can have the item animated when the RecyclerView changes.
+    var removedPos = 0
     var listCount = 0
 
     fun addTask(task: Task) {
@@ -21,6 +24,7 @@ class TasksViewModel @Inject constructor(
         _tasks.postValue(tasks)
         repository.saveToObjectBox(task)
     }
+
     fun getTasks() {
         if (tasks.isEmpty()) {
             repository.getObjectBoxList().forEach {
@@ -42,9 +46,5 @@ class TasksViewModel @Inject constructor(
         tasks.removeAt(position)
         removedPos = position
         _tasks.postValue(tasks)
-    }
-
-    fun removeAll() {
-        repository.removeAll()
     }
 }

@@ -22,20 +22,15 @@ class TasksRepository @Inject constructor(){
         return tasksBox.all.toMutableList()
     }
 
-    fun removeAll() {
-        tasksBox.removeAll()
-    }
-
     fun addToCompleted(task: Task) {
         val query = tasksBox
             .query(TaskOB_.taskName.equal(task.name!!))
             .build()
         val result = query.findFirst()
-        result?.isChecked = true
 
         if (result != null) {
+            result.isChecked = true
             result.completionDate = Constants().DATE
-            println("completed at: ${result.completionDate}")
             tasksBox.put(result)
         }
         query.close()
