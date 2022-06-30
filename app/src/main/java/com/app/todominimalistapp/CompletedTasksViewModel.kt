@@ -2,7 +2,9 @@ package com.app.todominimalistapp
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,7 +27,9 @@ class CompletedTasksViewModel @Inject constructor(
             if (task.isChecked) {
                 if (task.date != null) {
                     if (Constants().DATE > task.date!!) {
-                        repository.removeFromBox(task)
+                        viewModelScope.launch {
+                            repository.removeFromBox(task)
+                        }
                         return@forEach
                     }
                 }
@@ -36,6 +40,8 @@ class CompletedTasksViewModel @Inject constructor(
     }
 
     fun addToCompleted(task: Task) {
-        repository.addToCompleted(task)
+        viewModelScope.launch {
+            repository.addToCompleted(task)
+        }
     }
 }
