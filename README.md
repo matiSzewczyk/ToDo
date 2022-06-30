@@ -1,2 +1,5 @@
-# ToDo applicatin
-A rework of my original TODO app, soon on Google Play
+# ToDo - Minimalist app
+A minimalist ToDo application. < br/>
+
+Google Play: <br />
+https://play.google.com/store/apps/details?id=com.app.todominimalistapp
