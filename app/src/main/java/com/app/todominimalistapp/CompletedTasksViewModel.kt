@@ -12,11 +12,10 @@ class CompletedTasksViewModel @Inject constructor(
     private val repository: TasksRepository
 ): ViewModel() {
 
-    var _tasks = MutableLiveData<MutableList<Task>>()
-    var tasks = mutableListOf<Task>()
+    var tasks = MutableLiveData<MutableList<Task>>(mutableListOf())
 
     fun getTasks() {
-        tasks.clear()
+        tasks.value!!.clear()
         repository.getObjectBoxList().forEach {
             val task = Task(
                 it.taskName,
@@ -33,8 +32,8 @@ class CompletedTasksViewModel @Inject constructor(
                         return@forEach
                     }
                 }
-                tasks.add(task)
-                _tasks.postValue(tasks)
+                tasks.value!!.add(task)
+                tasks.value = tasks.value
             }
         }
     }

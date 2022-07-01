@@ -10,8 +10,7 @@ class TasksViewModel @Inject constructor(
     private val repository: TasksRepository
 ): ViewModel() {
 
-    var _tasks = MutableLiveData<MutableList<Task>>()
-    var tasks = mutableListOf<Task>()
+    var tasks = MutableLiveData<MutableList<Task>>(mutableListOf())
 
 //     These variables allow me to know if an item was removed or inserted into the list
 //     as well as know it's position.
@@ -20,13 +19,13 @@ class TasksViewModel @Inject constructor(
     var listCount = 0
 
     fun addTask(task: Task) {
-        tasks.add(task)
-        _tasks.postValue(tasks)
+        tasks.value!!.add(task)
+        tasks.value = tasks.value
         repository.saveToObjectBox(task)
     }
 
     fun getTasks() {
-        if (tasks.isEmpty()) {
+        if (tasks.value!!.isEmpty()) {
             repository.getObjectBoxList().forEach {
                 val task = Task(
                     it.taskName,
@@ -34,17 +33,17 @@ class TasksViewModel @Inject constructor(
                     it.isChecked
                 )
                 if (!task.isChecked) {
-                    tasks.add(task)
-                    _tasks.postValue(tasks)
+                    tasks.value!!.add(task)
+                    tasks.value = tasks.value
                 }
             }
-            listCount = tasks.size
+            listCount = tasks.value!!.size
         }
     }
 
     fun removeTaskFromRv(position: Int) {
-        tasks.removeAt(position)
+        tasks.value!!.removeAt(position)
         removedPos = position
-        _tasks.postValue(tasks)
+        tasks.value = tasks.value
     }
 }

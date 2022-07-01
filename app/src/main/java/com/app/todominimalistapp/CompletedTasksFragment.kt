@@ -26,7 +26,7 @@ class CompletedTasksFragment : Fragment(R.layout.fragment_completed_tasks){
         val tasksObserver = Observer<List<Task>> {
             completedTasksAdapter.notifyDataSetChanged()
         }
-        completedTasksViewModel._tasks.observe(viewLifecycleOwner, tasksObserver)
+        completedTasksViewModel.tasks.observe(viewLifecycleOwner, tasksObserver)
 
         lifecycleScope.launch(Dispatchers.Main) {
             completedTasksViewModel.getTasks()
@@ -35,7 +35,7 @@ class CompletedTasksFragment : Fragment(R.layout.fragment_completed_tasks){
 
     private fun setupRecyclerView() = binding.completedRecyclerView.apply {
         completedTasksAdapter = CompletedTasksAdapter(
-            completedTasksViewModel.tasks
+            completedTasksViewModel.tasks.value!!
         )
         adapter = completedTasksAdapter
         layoutManager = LinearLayoutManager(context)

@@ -36,7 +36,7 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), CustomClickInterface {
                 tasksViewModel.listCount--
             }
         }
-        tasksViewModel._tasks.observe(viewLifecycleOwner, tasksObserver)
+        tasksViewModel.tasks.observe(viewLifecycleOwner, tasksObserver)
 
         binding.addTaskButton.setOnClickListener {
             lifecycleScope.launch(Main) {
@@ -52,7 +52,7 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), CustomClickInterface {
 
     private fun setupRecyclerView() = binding.tasksRecyclerView.apply {
         tasksAdapter = TasksAdapter(
-            tasksViewModel.tasks,
+            tasksViewModel.tasks.value!!,
             this@TasksFragment
         )
         adapter = tasksAdapter
