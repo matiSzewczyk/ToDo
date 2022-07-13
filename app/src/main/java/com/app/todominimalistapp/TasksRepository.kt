@@ -1,12 +1,13 @@
 package com.app.todominimalistapp
 
+import io.objectbox.Box
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class TasksRepository @Inject constructor(){
-
-    private val tasksBox = ObjectBox.store.boxFor(TaskOB::class.java)
+class TasksRepository @Inject constructor(
+    private val tasksBox: Box<TaskOB>
+){
 
     fun saveToObjectBox(task: Task) {
         val taskOB = TaskOB(
