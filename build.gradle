@@ -9,7 +9,6 @@ buildscript {
         // Nav
         def nav_version = "2.4.2"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
-
         // Hilt
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.42'
         // ObjectBox
