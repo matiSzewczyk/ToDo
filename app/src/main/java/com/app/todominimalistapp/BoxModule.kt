@@ -9,7 +9,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class TestModule {
+class BoxModule {
 
     @Singleton
     @Provides
