@@ -46,12 +46,6 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), CustomClickInterface {
                 dialog.show(childFragmentManager, "show")
             }
         }
-
-        lifecycleScope.launch(Main) {
-            tasksViewModel.getTasks()
-        }
-        registerForContextMenu(binding.tasksRecyclerView)
-
     }
 
     private fun setupRecyclerView() = binding.tasksRecyclerView.apply {
@@ -77,8 +71,11 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), CustomClickInterface {
         taskDescription: TextView
     ) {
         if (checked) {
-            val task =
-                Task(taskName.text.toString(), taskDescription.text.toString(), true)
+            val task = Task(
+                taskName.text.toString(),
+                taskDescription.text.toString(),
+                true
+            )
             tasksViewModel.removeTaskFromRv(adapterPosition)
             completedTasksViewModel.addToCompleted(task)
         }

@@ -2,7 +2,9 @@ package com.app.todominimalistapp
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,13 +20,17 @@ class TasksViewModel @Inject constructor(
     var removedPos = 0
     var listCount = 0
 
+    init {
+        getTasks()
+    }
+
     fun addTask(task: Task) {
         tasks.value!!.add(task)
         tasks.value = tasks.value
         repository.saveToObjectBox(task)
     }
 
-    fun getTasks() {
+    private fun getTasks() = viewModelScope.launch {
         if (tasks.value!!.isEmpty()) {
             repository.getObjectBoxList().forEach {
                 val task = Task(

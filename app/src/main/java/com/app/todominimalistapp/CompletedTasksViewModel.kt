@@ -14,7 +14,7 @@ class CompletedTasksViewModel @Inject constructor(
 
     var tasks = MutableLiveData<MutableList<Task>>(mutableListOf())
 
-    fun getTasks() {
+    fun getTasks() = viewModelScope.launch {
         tasks.value!!.clear()
         repository.getObjectBoxList().forEach {
             val task = Task(

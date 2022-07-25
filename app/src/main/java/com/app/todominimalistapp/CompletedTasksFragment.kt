@@ -5,11 +5,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.todominimalistapp.databinding.FragmentCompletedTasksBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class CompletedTasksFragment : Fragment(R.layout.fragment_completed_tasks){
 
@@ -28,9 +25,7 @@ class CompletedTasksFragment : Fragment(R.layout.fragment_completed_tasks){
         }
         completedTasksViewModel.tasks.observe(viewLifecycleOwner, tasksObserver)
 
-        lifecycleScope.launch(Dispatchers.Main) {
-            completedTasksViewModel.getTasks()
-        }
+        completedTasksViewModel.getTasks()
     }
 
     private fun setupRecyclerView() = binding.completedRecyclerView.apply {
