@@ -1,8 +1,11 @@
 package com.app.todominimalistapp
 
 import android.os.Bundle
+import android.view.ContextMenu
+import android.view.ContextThemeWrapper
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -48,6 +51,8 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), CustomClickInterface {
         lifecycleScope.launch(Main) {
             tasksViewModel.getTasks()
         }
+        registerForContextMenu(binding.tasksRecyclerView)
+
     }
 
     private fun setupRecyclerView() = binding.tasksRecyclerView.apply {
@@ -66,6 +71,27 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), CustomClickInterface {
         }
     }
 
+    override fun onLongClickListener(view: View, position: Int) {
+        showPopupMenu(view, position)
+    }
+
+    private fun showPopupMenu(view: View, position: Int) {
+        val wrapper = ContextThemeWrapper(context, R.style.BasePopupMenu)
+        val menu = PopupMenu(wrapper, view)
+
+        menu.menu.add(0, view.id, 0, "Delete task")
+        menu.setOnMenuItemClickListener {
+            when (it.title) {
+                "Delete task" -> {
+                    tasksViewModel.deleteTask(position)
+                    true
+                }
+                else -> false
+            }
+        }
+        menu.show()
+    }
+
     override fun onCheckedChangeListener(
         adapterPosition: Int,
         checked: Boolean,
@@ -78,5 +104,14 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), CustomClickInterface {
             tasksViewModel.removeTaskFromRv(adapterPosition)
             completedTasksViewModel.addToCompleted(task)
         }
+    }
+
+    override fun onCreateContextMenu(
+        menu: ContextMenu,
+        v: View,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        menu.add(0, view!!.id, 0, "Delete task")
     }
 }

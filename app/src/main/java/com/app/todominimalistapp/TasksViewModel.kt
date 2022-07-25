@@ -46,4 +46,12 @@ class TasksViewModel @Inject constructor(
         removedPos = position
         tasks.value = tasks.value
     }
+
+    fun deleteTask(position: Int) {
+        val task = tasks.value!![position]
+        tasks.value!!.removeAt(position)
+        removedPos = position
+        tasks.value = tasks.value
+        repository.removeFromBox(task)
+    }
 }

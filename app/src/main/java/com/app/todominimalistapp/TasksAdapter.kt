@@ -20,6 +20,10 @@ class TasksAdapter(
                         binding.taskDescription
                     )
                 }
+                itemView.setOnLongClickListener {
+                    customClickInterface.onLongClickListener(itemView, adapterPosition)
+                    true
+                }
                 binding.taskCheckBox.setOnCheckedChangeListener { _, isChecked ->
                     customClickInterface.onCheckedChangeListener(
                         adapterPosition,

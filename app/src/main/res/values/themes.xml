@@ -17,4 +17,11 @@
 
         <item name="android:fontFamily">@font/baloo</item>
     </style>
+    <style name="BasePopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:popupMenuStyle">@drawable/item_background</item>
+        <item name="android:textColor">@color/aqua</item>
+        <item name="android:drawableStart">@drawable/delete_img</item>
+        <item  name="android:drawablePadding">10dp</item>
+        <item name="android:popupBackground">@drawable/item_background</item>
+    </style>
 </resources>
