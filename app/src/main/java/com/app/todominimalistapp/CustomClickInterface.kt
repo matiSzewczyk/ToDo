@@ -5,7 +5,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 
 interface CustomClickInterface {
-    fun onClickListener(position: Int, hiddenLayout: LinearLayout, taskDescription: TextView)
+    fun onClickListener(hiddenLayout: LinearLayout, taskDescription: TextView)
     fun onLongClickListener(view: View, position: Int)
     fun onCheckedChangeListener(
         adapterPosition: Int,

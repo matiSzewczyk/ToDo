@@ -15,7 +15,6 @@ class TasksAdapter(
             apply {
                 itemView.setOnClickListener {
                     customClickInterface.onClickListener(
-                        adapterPosition,
                         binding.hiddenLayout,
                         binding.taskDescription
                     )

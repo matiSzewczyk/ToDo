@@ -1,7 +1,6 @@
 package com.app.todominimalistapp
 
 import android.os.Bundle
-import android.view.ContextMenu
 import android.view.ContextThemeWrapper
 import android.view.View
 import android.widget.LinearLayout
@@ -64,10 +63,24 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), CustomClickInterface {
         layoutManager = LinearLayoutManager(context)
     }
 
-    override fun onClickListener(position: Int, hiddenLayout: LinearLayout, taskDescription: TextView) {
+    override fun onClickListener(hiddenLayout: LinearLayout, taskDescription: TextView) {
         if (taskDescription.text.isNotEmpty()) {
             hiddenLayout.visibility =
                 if (hiddenLayout.visibility == View.GONE) View.VISIBLE else View.GONE
+        }
+    }
+
+    override fun onCheckedChangeListener(
+        adapterPosition: Int,
+        checked: Boolean,
+        taskName: TextView,
+        taskDescription: TextView
+    ) {
+        if (checked) {
+            val task =
+                Task(taskName.text.toString(), taskDescription.text.toString(), true)
+            tasksViewModel.removeTaskFromRv(adapterPosition)
+            completedTasksViewModel.addToCompleted(task)
         }
     }
 
@@ -90,19 +103,5 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), CustomClickInterface {
             }
         }
         menu.show()
-    }
-
-    override fun onCheckedChangeListener(
-        adapterPosition: Int,
-        checked: Boolean,
-        taskName: TextView,
-        taskDescription: TextView
-    ) {
-        if (checked) {
-            val task =
-                Task(taskName.text.toString(), taskDescription.text.toString(), true)
-            tasksViewModel.removeTaskFromRv(adapterPosition)
-            completedTasksViewModel.addToCompleted(task)
-        }
     }
 }
