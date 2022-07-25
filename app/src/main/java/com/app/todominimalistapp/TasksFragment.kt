@@ -105,13 +105,4 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), CustomClickInterface {
             completedTasksViewModel.addToCompleted(task)
         }
     }
-
-    override fun onCreateContextMenu(
-        menu: ContextMenu,
-        v: View,
-        menuInfo: ContextMenu.ContextMenuInfo?
-    ) {
-        super.onCreateContextMenu(menu, v, menuInfo)
-        menu.add(0, view!!.id, 0, "Delete task")
-    }
 }
