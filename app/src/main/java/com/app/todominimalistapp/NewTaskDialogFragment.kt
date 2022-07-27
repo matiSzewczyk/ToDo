@@ -7,10 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import com.app.todominimalistapp.databinding.DialogNewTaskFragmentBinding
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.launch
 
 class NewTaskDialogFragment : DialogFragment() {
 
