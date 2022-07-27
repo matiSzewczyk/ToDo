@@ -24,7 +24,7 @@ class TasksViewModel @Inject constructor(
         getTasks()
     }
 
-    fun addTask(task: Task) {
+    fun addTask(task: Task) = viewModelScope.launch {
         tasks.value!!.add(task)
         tasks.value = tasks.value
         repository.saveToObjectBox(task)
@@ -53,7 +53,7 @@ class TasksViewModel @Inject constructor(
         tasks.value = tasks.value
     }
 
-    fun deleteTask(position: Int) {
+    fun deleteTask(position: Int) = viewModelScope.launch {
         val task = tasks.value!![position]
         tasks.value!!.removeAt(position)
         removedPos = position

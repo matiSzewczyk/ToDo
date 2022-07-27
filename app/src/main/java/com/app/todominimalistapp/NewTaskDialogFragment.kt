@@ -44,15 +44,13 @@ class NewTaskDialogFragment : DialogFragment() {
                         .show()
                     return@setOnClickListener
                 }
-                lifecycleScope.launch(Main) {
-                    tasksViewModel.addTask(
-                        Task(
-                            taskName.text.toString(),
-                            taskDescription.text.toString(),
-                            false
-                        )
+                tasksViewModel.addTask(
+                    Task(
+                        taskName.text.toString(),
+                        taskDescription.text.toString(),
+                        false
                     )
-                }
+                )
                 dialog!!.dismiss()
             }
         }
